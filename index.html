@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Example</title>
+</head>
+<body>
+  <h1>Submit your info</h1>
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="email" id="email" placeholder="Your Email" required>
+  <button id="submitBtn">Submit</button>
+
+  <script>
+    document.getElementById("submitBtn").addEventListener("click", () => {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+
+        fetch("https://a12b34cd.ngrok.io/submit", { // replace with your ngrok URL
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({name, email})
+        })
+        .then(res => res.json())
+        .then(data => alert("Data sent!"))
+        .catch(err => alert("Error: " + err));
+    });
+  </script>
+</body>
+</html>
